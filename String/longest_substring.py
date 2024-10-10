@@ -12,6 +12,6 @@ def longestSubstring(str1):
     return result
 
 
-str1 = 'abcefabcbb'
+str1 = 'pwwkew'
 print(longestSubstring(str1))
 

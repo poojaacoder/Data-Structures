@@ -1,5 +1,6 @@
 Arrays & Strings
 Two pointer approach
+sliding window
 Bit Manipulation
 Binary Search
 Recursion

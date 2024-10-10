@@ -19,8 +19,8 @@ def numSquares(n: int) -> int:
 
 
 def numSquares_dp(n):
-    dp = [n] * (n + 1)  # 1^2 x n
-    dp[0] = 0  # no way
+    dp = [n] * (n + 1)  
+    dp[0] = 0  
     dp[1] = 1  # 1^2
     print(dp)
     for i in range(2, n + 1):
