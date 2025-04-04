@@ -5,9 +5,10 @@ def topologicalsort(graph):
 
     def dfs(start):
         visited.add(start)
-        for neighbor in graph.get(node, []):
+        for neighbor in graph.get(start, []):
             if neighbor not in visited:
                 dfs(neighbor)
+        stack.append(start)
 
     for node in graph:
         if node not in visited:

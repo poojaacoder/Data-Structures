@@ -1,27 +1,44 @@
-def detect_cycle(graph , start, visited=None):
-    if not visited:
-        visited = set()
 
-    stack = []
-    stack.append(start)
-    visited.add(start)
 
-    while stack: 
-        node = stack.pop()
-        visited.add(node)
-        for neighbor in graph.get(node,[]):
-            if neighbor in visited:
-                return True
-            stack.append(neighbor)
-    return False
 
 def detect_cycle_multiple_components(graph):
     visited = set()
+    def detect_cycle(graph , node, parent):
+        visited.add(node)
+        for n in graph.get(node, []):
+            if n not in visited:
+                if detect_cycle(graph, n, node):
+                    return True
+            elif n != parent:
+                return True
+        return False
+    
     for node in graph:
         if node not in visited:
             if detect_cycle(graph, node, visited):
                 return True
     return False
+
+def detectcycleundirectediterative(graph):
+    visited = set()
+    for start in graph:
+        if start not in visited:
+            stack = []
+            stack.append((start, None))
+            while stack:
+                node, parent = stack.pop()
+
+                if node in visited:
+                    continue
+                visited.add(node)
+
+                for neighbor in graph.get(node, []):
+                    if neighbor not in visited:
+                        stack.append((neighbor, node))
+                    elif neighbor != parent:
+                        return True
+    return False
+
 
 
 
@@ -42,9 +59,9 @@ def dfs_recursive(graph, node, parent, visited):
         return True
     visited.add(node)
     for neighbor in graph.get(node, []):
-        if neighbor == parent:
-            continue
         if dfs_recursive(graph, neighbor, node, visited):
+            return True
+        elif neighbor != parent:
             return True
     return False
 

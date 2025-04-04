@@ -1,37 +1,33 @@
 
 from collections import defaultdict, deque
-def topologicalsort(graph):
-    # create in degree
+def topologicalsort(graph): 
+#   create indegree
     indegree = defaultdict(int)
     for node in graph:
-        for neighbor in graph.get(node, []):
-            indegree[neighbor] +=1
-
-    # copy all 0 in queue
-    queue = deque()
-    for node in indegree:
+        for neighbor in graph.get(node, []): 
+            indegree[neighbor]+=1
+    
+    for node in graph:
+        indegree[node] += 0  
+# copy ele with 0 degree to q
+    q = deque()
+    for node in graph:
         if indegree[node] == 0:
-            queue.append(node)
-
-
-    # traverse and store in queue, while adding to order
+            q.append(node)
+#  main execution to free the degrees
     order = []
-
-    while queue:
-        node = queue.popleft()
+    while q:
+        node = q.popleft()
         order.append(node)
-        for node in graph:
-            for neighbor in graph.get(node, []):
-                indegree[neighbor] -=1
-                if indegree[neighbor] == 0:
-                    queue.append(neighbor)
-   
+        for neighbor in graph.get(node, []):
+            indegree[neighbor] -=1
+            if indegree[neighbor] == 0:
+                q.append(neighbor)
 
-
-    # if len order is less than then its a cycle
     if len(order) == len(graph):
         return order
     else:
-        print("cycle detected")
-        return []
+        print('cycle detected')
 
+    
+# 

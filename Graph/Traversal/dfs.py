@@ -16,22 +16,24 @@ def dfs(dfslist, start, visited):
         if neighbor not in visited:
             dfs(dfslist, neighbor, visited)
 
+
     
 # iterative
 def dfsIterative(dfslist, start):
-    stack = []
+    stack = [start]
     visited = set()
-    stack.append(start)
-    visited.add(start)
+    res = []
 
     while stack:
         node = stack.pop()
-        if node not in visited:
-            visited.add(node)
-        for neighbor in dfslist[node]:
+        if node in visited:
+            continue
+        visited.add(node)
+        res.append(node)
+        for neighbor in reversed(dfslist[node]):
             if neighbor not in visited:
                 stack.append(neighbor)
-    return visited
+    return res
 
     
 
