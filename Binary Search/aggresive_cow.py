@@ -10,7 +10,7 @@ def aggresive_cows(dist, stalls, k):
         if cows_count == k:
             return True
     return False
-s
+
 def findminmax(stalls, k):
     stalls.sort()
     limit = stalls[n-1] -stalls[0]
